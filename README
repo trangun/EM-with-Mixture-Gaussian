@@ -1,0 +1,50 @@
+Trang Nguye
+Machine Learning
+Hoemwork 7: EM with Gaussian Mixture
+
+--Files
+nguyen_em_gaussian.py: main file
+plot_em.py: has the experiment function and add extra args.plot to represent the experiment
+
+--Description
+This project is a simple implementation of Expectation Maximum algorithm with Gaussian Mixture.
+Basically, this is a typical unsupervised machine learning problem since we need to find a 
+relavant way to cluster those data points with this algorithm. Similar to k-means alogrithm,
+we will have two steps to approach the ideal solution which are expectation and maximization
+steps. For the expectation step, we basically calculate the expectation for each cluster then
+in the maximization step, we will use the expectation to compute the parameters for the current
+model. However, with Gaussian Mixture, we can have gaussian models with different means and 
+covariances. And then we can use them to fit any complicated data distribution. Hence, we don't 
+have to compute the distance as in k-means with Euclidean distance, but the probability of each 
+data point which belong to that cluster. Therefore, we just need to calculate the probability of
+each data point to every cluster in the expectation step of the EM algorithm with Gaussian 
+Mixture. And then we will update the process for each parameter in each cluster which are 
+lambda, mean, and covariance. Since we can't figure out the derivation of sum of log function
+so the stochastic gradient method will not be doable.
+
+--Method of Initialize Model
+Before the E-step, we need to initialize the initial parameters of the model. Here, we initialize
+the lambdas with the fraction of 1/args.cluster_num for every cluster. For mus (means), we
+initialize means with random points with numpy.random.uniform() with multiple restarts. We have
+seed=10000, a constant number, so that we can have the same results every time. It will help with
+the consistent of the experiment later. For sigmas, we initialize it with identity matrix.
+
+--Experiment
+We have the iteration range from 1 to 25 and cluster range from 2 to 9 to do this experiment.
+We will have to 2 experiments. One with tied covariance which means that we will have only one 
+covariance for every cluster. And the other one is with standard, separate covariance for every
+cluster.
+
+We have a total of 4 graphs. The graphs in nt_cluster2-5.png and nt_cluster6-9.png are the models
+with standard, separate covariance setting which we will denote as graph (a) here. The graphs in 
+t_cluster2-5.png and t_cluster6-9.png are the models that implement tied covariances. We will 
+denote these graphs as graph (b) here. For graph (a), in general, the average log likelihood is 
+increasing as the iteration increases. As the cluster_num increases, the train average log 
+likelihood increases too. However, we will face with overfitting issue so that the dev average log
+likelihood might be decreasing at some points. For graph (b) where we have tied covariance, we can
+see that with just one covariance, the average log likelihood for both train and dev decrease 
+drastically at some points. We have this problem because we only have one gaussian to fit the data 
+but the datasets, in general, are typically with irregular distribution. Hence, it's hard to find 
+a relevant shape that fit with an irregular data distribution.
+
+
