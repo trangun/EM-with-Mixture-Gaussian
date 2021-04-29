@@ -1,12 +1,8 @@
-Trang Nguyen
-Machine Learning
-Hoemwork 7: EM with Gaussian Mixture
-
---Files
+# Files
 nguyen_em_gaussian.py: main file
 plot_em.py: has the experiment function and add extra args.plot to represent the experiment
 
---Description
+# Description
 This project is a simple implementation of Expectation Maximum algorithm with Gaussian Mixture.
 Basically, this is a typical unsupervised machine learning problem since we need to find a 
 relavant way to cluster those data points with this algorithm. Similar to k-means alogrithm,
@@ -22,14 +18,14 @@ Mixture. And then we will update the process for each parameter in each cluster 
 lambda, mean, and covariance. Since we can't figure out the derivation of sum of log function
 so the stochastic gradient method will not be doable.
 
---Method of Initialize Model
+# Method of Initialize Model
 Before the E-step, we need to initialize the initial parameters of the model. Here, we initialize
 the lambdas with the fraction of 1/args.cluster_num for every cluster. For mus (means), we
 initialize means with random points with numpy.random.uniform() with multiple restarts. We have
 seed=10000, a constant number, so that we can have the same results every time. It will help with
 the consistent of the experiment later. For sigmas, we initialize it with identity matrix.
 
---Experiment
+# Experiment
 We have the iteration range from 1 to 25 and cluster range from 2 to 9 to do this experiment.
 We will have to 2 experiments. One with tied covariance which means that we will have only one 
 covariance for every cluster. And the other one is with standard, separate covariance for every
